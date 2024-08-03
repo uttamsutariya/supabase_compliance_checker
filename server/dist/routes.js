@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const authController_1 = require("./controllers/authController");
+const authMiddleware_1 = require("./middlewares/authMiddleware");
+const supabaseController_1 = require("./controllers/supabaseController");
+const complianceController_1 = require("./controllers/complianceController");
+const router = (0, express_1.Router)();
+router.post('/auth/google', authController_1.authenticate);
+router.use(authMiddleware_1.verifyToken);
+router.get('/auth/logout', authController_1.logout);
+router.get('/auth/secret', authController_1.getSecret);
+router.post('/connectSupabase', supabaseController_1.connectSupabase);
+router.get('/syncCompliance', complianceController_1.syncCompliance);
+router.get('/getCompliance', complianceController_1.getCompliance);
+exports.default = router;
